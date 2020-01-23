@@ -1,0 +1,630 @@
+openapi: 3.0.1
+info:
+  title: tutorial-commandes-api
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: http://u3antu152:8015/api-tutorial-commandes-v1
+  description: Integration
+paths:
+  /commandes:
+    get:
+      tags:
+      - Commandes
+      operationId: findCommandes
+      parameters:
+      - name: idClient
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: statutCommande
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/StatutCommande'
+      - name: reference
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                minItems: 0
+                type: array
+                items:
+                  $ref: '#/components/schemas/Commande'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    field:
+                      type: string
+                    label:
+                      type: string
+                    path:
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                    value:
+                      type: string
+                    limit:
+                      type: string
+      deprecated: false
+    post:
+      tags:
+      - Commandes
+      operationId: createCommande
+      parameters:
+      - name: commande
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Commande'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Commande'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commande'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    field:
+                      type: string
+                    label:
+                      type: string
+                    path:
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                    value:
+                      type: string
+                    limit:
+                      type: string
+      deprecated: false
+  /commandes/{id}:
+    get:
+      tags:
+      - Commandes
+      operationId: readCommande
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commande'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    field:
+                      type: string
+                    label:
+                      type: string
+                    path:
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                    value:
+                      type: string
+                    limit:
+                      type: string
+      deprecated: false
+    put:
+      tags:
+      - Commandes
+      operationId: updateCommande
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: commande
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Commande'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Commande'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commande'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    field:
+                      type: string
+                    label:
+                      type: string
+                    path:
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                    value:
+                      type: string
+                    limit:
+                      type: string
+      deprecated: false
+    delete:
+      tags:
+      - Commandes
+      operationId: deleteCommande
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        204:
+          description: No Content
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    field:
+                      type: string
+                    label:
+                      type: string
+                    path:
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                    value:
+                      type: string
+                    limit:
+                      type: string
+      deprecated: false
+  /commandes/{id}/lignesCommande:
+    get:
+      tags:
+      - Commandes
+      operationId: readLignesCommande
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                minItems: 0
+                type: array
+                items:
+                  $ref: '#/components/schemas/LigneCommande'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    field:
+                      type: string
+                    label:
+                      type: string
+                    path:
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                    value:
+                      type: string
+                    limit:
+                      type: string
+      deprecated: false
+    put:
+      tags:
+      - Commandes
+      operationId: updateLignesCommande
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: lignesCommande
+        in: query
+        required: false
+        schema:
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/LigneCommande'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              minItems: 0
+              type: array
+              items:
+                $ref: '#/components/schemas/LigneCommande'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commande'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    field:
+                      type: string
+                    label:
+                      type: string
+                    path:
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                    value:
+                      type: string
+                    limit:
+                      type: string
+      deprecated: false
+    post:
+      tags:
+      - Commandes
+      operationId: createLigneCommande
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: ligneCommande
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/LigneCommande'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LigneCommande'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commande'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    field:
+                      type: string
+                    label:
+                      type: string
+                    path:
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                    value:
+                      type: string
+                    limit:
+                      type: string
+      deprecated: false
+  /commandes/{id}/statutCommande:
+    put:
+      tags:
+      - Commandes
+      operationId: updateStatutCommande
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: statutCommande
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/StatutCommande'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatutCommande'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commande'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    field:
+                      type: string
+                    label:
+                      type: string
+                    path:
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                    value:
+                      type: string
+                    limit:
+                      type: string
+      deprecated: false
+  /clients/{id}/commandes:
+    get:
+      tags:
+      - Clients
+      operationId: findCommandesClient
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: statutCommande
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/StatutCommande'
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                minItems: 0
+                type: array
+                items:
+                  $ref: '#/components/schemas/Commande'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    field:
+                      type: string
+                    label:
+                      type: string
+                    path:
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                    value:
+                      type: string
+                    limit:
+                      type: string
+      deprecated: false
+  /clients/debiteurs:
+    get:
+      tags:
+      - Clients
+      operationId: debiteurs
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                minItems: 0
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    field:
+                      type: string
+                    label:
+                      type: string
+                    path:
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                    value:
+                      type: string
+                    limit:
+                      type: string
+      deprecated: false
+components:
+  schemas:
+    LigneCommande:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        libelle:
+          type: string
+        prixUnitaire:
+          type: number
+          format: double
+        quantite:
+          type: integer
+          format: int64
+        montant:
+          type: number
+          format: double
+    Commande:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        montant:
+          type: number
+          format: double
+        libelle:
+          type: string
+        reference:
+          type: string
+        lignesCommande:
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/LigneCommande'
+        client:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+        statutCommande:
+          $ref: '#/components/schemas/StatutCommande'
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        reference:
+          type: string
+        nom:
+          type: string
+        prenom:
+          type: string
+        dateNaissance:
+          type: string
+          format: date
+        majeur:
+          type: boolean
+    StatutCommande:
+      type: string
+      enum:
+      - ENREGISTREE
+      - ENCOURS
+      - LIVREE
+      - PAYEE
+      - IMPAYEE
